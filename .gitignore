@@ -1,0 +1,16 @@
+# Ignore everything by default
+*
+
+# Allow all directories (needed to reach files)
+!*/
+
+# Keep dockge and README
+!dockge/
+!README.md
+
+# Keep the gitignore itself
+!.gitignore
+
+# Allow .env and compose.yml anywhere
+!**/.env.example
+!**/compose.yml

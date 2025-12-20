@@ -8,9 +8,12 @@ theme:
   contrast-multiplier: 1.0
 
 pages:
-  - name: Overview
+  - name: Startpage
+    width: slim
+    hide-desktop-navigation: true
+    center-vertically: true
     columns:
-      - size: small
+      - size: full
         widgets:
           - type: clock
             hour-format: 24h
@@ -18,13 +21,6 @@ pages:
               - timezone: Europe/Brussels
                 label: Home
 
-          - type: weather
-            units: metric
-            hour-format: 24h
-            location: Brussels, Belgium
-
-      - size: full
-        widgets:
           - type: server-stats
             title: Homelab server
             servers:
@@ -72,7 +68,7 @@ pages:
               {{ end }}
 
           - type: monitor
-            title: Service Status
+            title: Services
             cache: 30s
             sites:
               - title: Dockge

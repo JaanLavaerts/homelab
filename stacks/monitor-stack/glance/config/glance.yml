@@ -75,7 +75,7 @@ pages:
                 url: http://192.168.1.10:5001
                 icon: /assets/dockge.png
               - title: Glance
-                url: http://192.168.1.10:8181
+                url: http://192.168.1.10:80
                 icon: /assets/glance.png
               - title: qBittorrent
                 icon: /assets/qbit.png

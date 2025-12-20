@@ -10,39 +10,27 @@ theme:
 pages:
   - name: Overview
     columns:
+      - size: small
+        widgets:
+          - type: clock
+            hour-format: 24h
+            timezones:
+              - timezone: Europe/Brussels
+                label: Home
+
+          - type: weather
+            units: metric
+            hour-format: 24h
+            location: Brussels, Belgium
+
       - size: full
         widgets:
-          - type: bookmarks
-            groups:
-              - title: Homelab Services
-                links:
-                  - title: Dockge
-                    url: http://192.168.1.10:5001
-                    icon: /assets/dockge.png
-                  - title: Glance
-                    url: http://192.168.1.10:8181
-                    icon: /assets/glance.png
-                  - title: qBittorrent
-                    url: http://192.168.1.10:8080
-                    icon: /assets/qbit.png
-                  - title: Radarr
-                    url: http://192.168.1.10:7878
-                    icon: /assets/radarr.png
-                  - title: Sonarr
-                    url: http://192.168.1.10:8989
-                    icon: /assets/sonarr.png
-                  - title: Prowlarr
-                    url: http://192.168.1.10:9696
-                    icon: /assets/prowlarr.png
-                  - title: Jellyfin
-                    url: http://192.168.1.10:8096
-                    icon: /assets/jellyfin.png
-                  - title: Plex
-                    url: http://192.168.1.10:32400
-                    icon: /assets/plex.png
-                  - title: FlareSolverr
-                    url: http://192.168.1.10:8191
-                    icon: /assets/flaresolverr.png
+          - type: server-stats
+            title: Homelab server
+            servers:
+              - type: local
+                name: Services
+                hide-mountpoints-by-default: true
 
           - type: monitor
             title: Service Status
@@ -55,26 +43,26 @@ pages:
                 url: http://192.168.1.10:8181
                 icon: /assets/glance.png
               - title: qBittorrent
-                url: http://192.168.1.10:8080
                 icon: /assets/qbit.png
+                url: http://192.168.1.10:8080
               - title: Radarr
-                url: http://192.168.1.10:7878
                 icon: /assets/radarr.png
+                url: http://192.168.1.10:7878
               - title: Sonarr
-                url: http://192.168.1.10:8989
                 icon: /assets/sonarr.png
+                url: http://192.168.1.10:8989
               - title: Prowlarr
-                url: http://192.168.1.10:9696
                 icon: /assets/prowlarr.png
+                url: http://192.168.1.10:9696
               - title: Jellyfin
-                url: http://192.168.1.10:8096
                 icon: /assets/jellyfin.png
+                url: http://192.168.1.10:8096
               - title: Plex
-                url: http://192.168.1.10:32400
                 icon: /assets/plex.png
+                url: http://192.168.1.10:32400
               - title: FlareSolverr
-                url: http://192.168.1.10:8191
                 icon: /assets/flaresolverr.png
+                url: http://192.168.1.10:8191
 
   - name: System
     columns:

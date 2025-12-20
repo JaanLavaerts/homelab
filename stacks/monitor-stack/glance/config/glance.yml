@@ -49,31 +49,31 @@ pages:
             cache: 30s
             sites:
               - title: Dockge
-                url: http://dockge:5001
+                url: http://192.168.1.10:5001
                 icon: /assets/dockge.png
               - title: Glance
-                url: http://glance:8080
+                url: http://192.168.1.10:8181
                 icon: /assets/glance.png
               - title: qBittorrent
-                url: http://gluetun:8080
-                icon: /assets/qbittorrent.png
+                url: http://192.168.1.10:8080
+                icon: /assets/qbit.png
               - title: Radarr
-                url: http://radarr:7878
+                url: http://192.168.1.10:7878
                 icon: /assets/radarr.png
               - title: Sonarr
-                url: http://sonarr:8989
+                url: http://192.168.1.10:8989
                 icon: /assets/sonarr.png
               - title: Prowlarr
-                url: http://prowlarr:9696
+                url: http://192.168.1.10:9696
                 icon: /assets/prowlarr.png
               - title: Jellyfin
-                url: http://jellyfin:8096
+                url: http://192.168.1.10:8096
                 icon: /assets/jellyfin.png
               - title: Plex
-                url: http://plex:32400
+                url: http://192.168.1.10:32400
                 icon: /assets/plex.png
               - title: FlareSolverr
-                url: http://flaresolverr:8191
+                url: http://192.168.1.10:8191
                 icon: /assets/flaresolverr.png
 
   - name: System

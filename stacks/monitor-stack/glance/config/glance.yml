@@ -8,8 +8,8 @@ theme:
   contrast-multiplier: 1.0
 
 branding:
-  - app-name: Bakske
-  - hide-footer: true
+  app-name: Bakske
+  hide-footer: true
 
 pages:
   - name: Startpage

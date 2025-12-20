@@ -17,6 +17,7 @@ services:
       - "8080:8080"    # qBittorrent Web UI (set to match qbittorrent WEBUI_PORT)
       - "6881:6881"    # example incoming TCP port (torrent traffic) - optional
       - "6881:6881/udp" # incoming UDP (DHT / uTP)
+      - "8000:8000"    # Gluetun HTTP control server for status/API
     volumes:
       - ./gluetun/config:/gluetun
     restart: unless-stopped

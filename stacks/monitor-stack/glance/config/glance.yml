@@ -35,7 +35,7 @@ pages:
           - type: custom-api
             title: Gluetun status
             cache: 1m
-            url: http://${GLUETUN_URL}/v1/publicip/ip
+            url: http://192.168.1.10:8000/v1/publicip/ip
             template: |
               {{ if eq .Response.StatusCode 200 }}
                 {{ $ip := (.JSON.String "public_ip") }}

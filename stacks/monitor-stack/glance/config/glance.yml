@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  assets-path: /app/assets
+
+pages:
+  - name: Home
+    columns:
+      - size: full
+        widgets:
+          - type: search
+            search-engine: duckduckgo
+            placeholder: "Search…"
+
+          - type: weather
+            units: metric
+            hour-format: 24h
+            location: Brussels, Belgium
+
+          - type: rss
+            title: Tech News
+            style: horizontal-cards
+            feeds:
+              - url: https://hnrss.org/frontpage
+                title: Hacker News
+
+          - type: docker-containers
+            title: Docker containers
+            sock-path: /var/run/docker.sock

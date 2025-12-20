@@ -3,7 +3,6 @@ services:
   dockge:
     image: louislam/dockge
     container_name: dockge
-    restart: unless-stopped
     ports:
       - "5001:5001"
     volumes:
@@ -12,3 +11,4 @@ services:
       - ${DOCKGE_STACKS_DIR}/stacks:${DOCKGE_STACKS_DIR}/stacks
     environment:
       DOCKGE_STACKS_DIR: ${DOCKGE_STACKS_DIR}/stacks
+    restart: unless-stopped

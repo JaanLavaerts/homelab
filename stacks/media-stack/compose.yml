@@ -118,7 +118,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Brussels
-      - PLEX_CLAIM=
+      - PLEX_CLAIM=claim-n2Dpd2wETH7fLL8XvRKF
     volumes:
       - ./plex/config:/config
       - ./media:/media

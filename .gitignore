@@ -4,8 +4,9 @@
 # Allow all directories (needed to reach files)
 !*/
 
-# Keep dockge and README
+# Keep dockge, stacks, and README
 !dockge/
+!stacks/
 !README.md
 
 # Keep the gitignore itself
@@ -14,3 +15,6 @@
 # Allow .env and compose.yml anywhere
 !**/.env.example
 !**/compose.yml
+
+# Ignore Tailscale state directory contents
+stacks/tailscale/tailscale/state/

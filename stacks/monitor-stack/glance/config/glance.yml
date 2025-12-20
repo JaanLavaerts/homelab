@@ -17,31 +17,31 @@ pages:
               - title: Homelab Services
                 links:
                   - title: Dockge
-                    url: http://host.docker.internal:5001
+                    url: http://192.168.1.10:5001
                     icon: /assets/dockge.png
                   - title: Glance
-                    url: http://host.docker.internal:8181
+                    url: http://192.168.1.10:8181
                     icon: /assets/glance.png
                   - title: qBittorrent
-                    url: http://host.docker.internal:8080
-                    icon: /assets/qbittorrent.png
+                    url: http://192.168.1.10:8080
+                    icon: /assets/qbit.png
                   - title: Radarr
-                    url: http://host.docker.internal:7878
+                    url: http://192.168.1.10:7878
                     icon: /assets/radarr.png
                   - title: Sonarr
-                    url: http://host.docker.internal:8989
+                    url: http://192.168.1.10:8989
                     icon: /assets/sonarr.png
                   - title: Prowlarr
-                    url: http://host.docker.internal:9696
+                    url: http://192.168.1.10:9696
                     icon: /assets/prowlarr.png
                   - title: Jellyfin
-                    url: http://host.docker.internal:8096
+                    url: http://192.168.1.10:8096
                     icon: /assets/jellyfin.png
                   - title: Plex
-                    url: http://host.docker.internal:32400
+                    url: http://192.168.1.10:32400
                     icon: /assets/plex.png
                   - title: FlareSolverr
-                    url: http://host.docker.internal:8191
+                    url: http://192.168.1.10:8191
                     icon: /assets/flaresolverr.png
 
           - type: monitor

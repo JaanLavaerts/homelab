@@ -3,8 +3,6 @@ services:
   glance:
     image: glanceapp/glance
     container_name: glance
-    environment:
-      - GLUETUN_URL=
     volumes:
       - ./glance/config:/app/config
       - ./glance/assets:/app/assets

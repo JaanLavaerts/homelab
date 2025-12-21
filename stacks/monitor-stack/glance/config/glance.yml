@@ -72,15 +72,9 @@ pages:
               {{ end }}
 
           - type: monitor
-            title: Services
+            title: Media Stack
             cache: 30s
             sites:
-              - title: Dockge
-                url: http://192.168.1.10:5001
-                icon: /assets/dockge.png
-              - title: Glance
-                url: http://192.168.1.10:80
-                icon: /assets/glance.png
               - title: qBittorrent
                 icon: /assets/qbit.png
                 url: http://192.168.1.10:8080
@@ -93,6 +87,9 @@ pages:
               - title: Prowlarr
                 icon: /assets/prowlarr.png
                 url: http://192.168.1.10:9696
+              - title: FlareSolverr
+                icon: /assets/flaresolverr.png
+                url: http://192.168.1.10:8191
               - title: Bazarr
                 icon: /assets/bazarr.png
                 url: http://192.168.1.10:6767
@@ -102,9 +99,17 @@ pages:
               - title: Plex
                 icon: /assets/plex.png
                 url: http://192.168.1.10:32400
-              - title: FlareSolverr
-                icon: /assets/flaresolverr.png
-                url: http://192.168.1.10:8191
+
+      - type: monitor
+         title: Monitor Stack
+         cache: 30s
+         sites:
+           - title: Glance
+              url: http://192.168.1.10:80
+              icon: /assets/glance.png
+           - title: Dockge
+             url: http://192.168.1.10:5001
+             icon: /assets/dockge.png
 
   - name: System
     columns:

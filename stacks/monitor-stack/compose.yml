@@ -34,6 +34,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       LISTEN: /beszel_socket/beszel.sock
-      HUB_URL: http://localhost:8090
+      HUB_URL: http://192.168.1.10:8090
       TOKEN: ${BESZEL_TOKEN}
       KEY: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJvzMOmFpIHbBModwWV53dKGGEdffNSWsc3ncwswcY8N"

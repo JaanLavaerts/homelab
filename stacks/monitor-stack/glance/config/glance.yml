@@ -17,7 +17,7 @@ pages:
     hide-desktop-navigation: true
     center-vertically: true
     columns:
-      - size: full
+      - size: 1
         widgets:
           - type: clock
             hour-format: 24h
@@ -67,7 +67,7 @@ pages:
                 {{ end }}
               {{ else }}
                 <div style="text-align: center; color: var(--color-negative);">
-                  Error: {{ .Response.StatusCode }} - {{ .Response.Status }}
+                  Error: {{ .Response.StatusCode }} - {{ .Response.StatusCode }}
                 </div>
               {{ end }}
 
@@ -100,6 +100,8 @@ pages:
                 icon: /assets/plex.png
                 url: http://192.168.1.10:32400
 
+      - size: 1
+        widgets:
           - type: monitor
             title: Monitor Stack
             cache: 30s

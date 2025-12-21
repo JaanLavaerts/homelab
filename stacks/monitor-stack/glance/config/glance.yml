@@ -17,7 +17,7 @@ pages:
     hide-desktop-navigation: true
     center-vertically: true
     columns:
-      - size: 1
+      - size: full
         widgets:
           - type: clock
             hour-format: 24h
@@ -100,7 +100,7 @@ pages:
                 icon: /assets/plex.png
                 url: http://192.168.1.10:32400
 
-      - size: 1
+      - size: full
         widgets:
           - type: monitor
             title: Monitor Stack

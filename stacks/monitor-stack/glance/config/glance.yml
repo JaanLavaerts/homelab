@@ -19,19 +19,6 @@ pages:
     columns:
       - size: full
         widgets:
-          - type: clock
-            hour-format: 24h
-            timezones:
-              - timezone: Europe/Brussels
-                label: Home
-
-          - type: server-stats
-            title: Homelab server
-            servers:
-              - type: local
-                name: Services
-                hide-mountpoints-by-default: false
-
           - type: custom-api
             title: Gluetun status
             cache: 1m
@@ -71,6 +58,13 @@ pages:
                 </div>
               {{ end }}
 
+          - type: server-stats
+            title: Homelab server
+            servers:
+              - type: local
+                name: Services
+                hide-mountpoints-by-default: false
+
           - type: split-column
             widgets:
               - type: monitor
@@ -106,15 +100,15 @@ pages:
                 title: Monitor Stack
                 cache: 30s
                 sites:
-                  - title: Glance
-                    url: http://192.168.1.10:80
-                    icon: /assets/glance.png
-                  - title: Dockge
-                    url: http://192.168.1.10:5001
-                    icon: /assets/dockge.png
                   - title: Beszel
                     url: http://192.168.1.10:8090
                     icon: /assets/beszel.png
+                  - title: Dockge
+                    url: http://192.168.1.10:5001
+                    icon: /assets/dockge.png
+                  - title: Glance
+                    url: http://192.168.1.10:80
+                    icon: /assets/glance.png
 
   - name: System
     columns:

@@ -58,12 +58,12 @@ pages:
                 </div>
               {{ end }}
 
-          - type: server-stats
-            title: Homelab server
-            servers:
-              - type: local
-                name: Services
-                hide-mountpoints-by-default: false
+          # - type: server-stats
+          #   title: Homelab server
+          #   servers:
+          #     - type: local
+          #       name: Services
+          #       hide-mountpoints-by-default: false
 
           - type: split-column
             widgets:

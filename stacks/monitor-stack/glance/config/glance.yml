@@ -71,47 +71,47 @@ pages:
                 </div>
               {{ end }}
 
-          - type: monitor
-            title: Media Stack
-            cache: 30s
-            sites:
-              - title: qBittorrent
-                icon: /assets/qbit.png
-                url: http://192.168.1.10:8080
-              - title: Radarr
-                icon: /assets/radarr.png
-                url: http://192.168.1.10:7878
-              - title: Sonarr
-                icon: /assets/sonarr.png
-                url: http://192.168.1.10:8989
-              - title: Prowlarr
-                icon: /assets/prowlarr.png
-                url: http://192.168.1.10:9696
-              - title: FlareSolverr
-                icon: /assets/flaresolverr.png
-                url: http://192.168.1.10:8191
-              - title: Bazarr
-                icon: /assets/bazarr.png
-                url: http://192.168.1.10:6767
-              - title: Jellyfin
-                icon: /assets/jellyfin.png
-                url: http://192.168.1.10:8096
-              - title: Plex
-                icon: /assets/plex.png
-                url: http://192.168.1.10:32400
+          - type: split-column
+            widgets:
+              - type: monitor
+                title: Media Stack
+                cache: 30s
+                sites:
+                  - title: qBittorrent
+                    icon: /assets/qbit.png
+                    url: http://192.168.1.10:8080
+                  - title: Radarr
+                    icon: /assets/radarr.png
+                    url: http://192.168.1.10:7878
+                  - title: Sonarr
+                    icon: /assets/sonarr.png
+                    url: http://192.168.1.10:8989
+                  - title: Prowlarr
+                    icon: /assets/prowlarr.png
+                    url: http://192.168.1.10:9696
+                  - title: FlareSolverr
+                    icon: /assets/flaresolverr.png
+                    url: http://192.168.1.10:8191
+                  - title: Bazarr
+                    icon: /assets/bazarr.png
+                    url: http://192.168.1.10:6767
+                  - title: Jellyfin
+                    icon: /assets/jellyfin.png
+                    url: http://192.168.1.10:8096
+                  - title: Plex
+                    icon: /assets/plex.png
+                    url: http://192.168.1.10:32400
 
-      - size: full
-        widgets:
-          - type: monitor
-            title: Monitor Stack
-            cache: 30s
-            sites:
-              - title: Glance
-                url: http://192.168.1.10:80
-                icon: /assets/glance.png
-              - title: Dockge
-                url: http://192.168.1.10:5001
-                icon: /assets/dockge.png
+              - type: monitor
+                title: Monitor Stack
+                cache: 30s
+                sites:
+                  - title: Glance
+                    url: http://192.168.1.10:80
+                    icon: /assets/glance.png
+                  - title: Dockge
+                    url: http://192.168.1.10:5001
+                    icon: /assets/dockge.png
 
   - name: System
     columns:

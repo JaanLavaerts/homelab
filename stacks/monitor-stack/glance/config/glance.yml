@@ -100,16 +100,16 @@ pages:
                 icon: /assets/plex.png
                 url: http://192.168.1.10:32400
 
-      - type: monitor
-         title: Monitor Stack
-         cache: 30s
-         sites:
-           - title: Glance
-              url: http://192.168.1.10:80
-              icon: /assets/glance.png
-           - title: Dockge
-             url: http://192.168.1.10:5001
-             icon: /assets/dockge.png
+          - type: monitor
+            title: Monitor Stack
+            cache: 30s
+            sites:
+              - title: Glance
+                url: http://192.168.1.10:80
+                icon: /assets/glance.png
+              - title: Dockge
+                url: http://192.168.1.10:5001
+                icon: /assets/dockge.png
 
   - name: System
     columns:

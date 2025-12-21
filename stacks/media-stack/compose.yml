@@ -41,6 +41,7 @@ services:
       - ./qbittorrent/config:/config
       - ./media/downloads:/downloads
       - ./media:/media
+      - ./media/nba:/nba
     restart: unless-stopped
 
   radarr:

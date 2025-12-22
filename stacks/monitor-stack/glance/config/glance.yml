@@ -109,6 +109,9 @@ pages:
                   - title: Glance
                     url: http://192.168.1.10:80
                     icon: /assets/glance.png
+                  - title: Cronmaster
+                    url: http://192.168.1.10:40123
+                    icon: /assets/cronmaster.png
 
   - name: System
     columns:

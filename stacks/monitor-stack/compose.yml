@@ -26,7 +26,6 @@ services:
   beszel-agent:
     image: henrygd/beszel-agent:latest
     container_name: beszel-agent
-    restart: unless-stopped
     network_mode: host
     volumes:
       - ./beszel_agent_data:/var/lib/beszel-agent
@@ -37,3 +36,25 @@ services:
       HUB_URL: http://192.168.1.10:8090
       TOKEN: ${BESZEL_TOKEN}
       KEY: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJvzMOmFpIHbBModwWV53dKGGEdffNSWsc3ncwswcY8N"
+    restart: unless-stopped
+
+  cronmaster:
+    image: ghcr.io/fccview/cronmaster:latest
+    container_name: cronmaster
+    user: "root"
+    ports:
+      - "40123:3000"
+    environment:
+      - NODE_ENV=production
+      - DOCKER=true
+      - NEXT_PUBLIC_CLOCK_UPDATE_INTERVAL=30000
+      - AUTH_PASSWORD=${CRONMASTER_PASSWORD}
+      - HOST_CRONTAB_USER=jaan
+    volumes:
+      - ./cronmaster/scripts:/app/scripts
+      - ./cronmaster/data:/app/data
+      - ./cronmaster/snippets:/app/snippets
+      - /var/run/docker.sock:/var/run/docker.sock
+    pid: "host"
+    privileged: true
+    restart: unless-stopped

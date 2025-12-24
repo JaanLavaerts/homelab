@@ -124,6 +124,11 @@ services:
     volumes:
       - ./jellyfin/config:/config
       - ./media:/media
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "video"
+      - "render"
     ports:
       - "8096:8096"
     restart: unless-stopped

@@ -111,7 +111,7 @@ pages:
                     url: http://192.168.1.10:8096
                   - title: Plex
                     icon: /assets/plex.png
-                    url: http://192.168.1.10:32400
+                    url: http://192.168.1.10:32400/web/index.html
 
               - type: monitor
                 title: Other

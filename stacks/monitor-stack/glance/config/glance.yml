@@ -112,9 +112,17 @@ pages:
                   - title: Plex
                     icon: /assets/plex.png
                     url: http://192.168.1.10:32400
-                  - title: Calibre-Web Automated
+
+              - type: monitor
+                title: Books
+                cache: 30s
+                sites:
+                  - title: CWA
                     icon: /assets/calibre.png
                     url: http://192.168.1.10:8083
+                  - title: CWA Downloader
+                    icon: /assets/cwad.png
+                    url: http://192.168.1.10:8084
 
               - type: monitor
                 title: Other

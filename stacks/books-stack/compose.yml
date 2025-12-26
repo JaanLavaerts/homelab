@@ -1,0 +1,37 @@
+services:
+  calibre-web-automated:
+    image: crocodilestick/calibre-web-automated:latest
+    container_name: calibre-web-automated
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+      # Hardcover API Key required for Hardcover as a Metadata Provider, get one here: https://docs.hardcover.app/api/getting-started/
+      - HARDCOVER_TOKEN=${HARDCOVER_TOKEN}
+      - NETWORK_SHARE_MODE=false
+      - CWA_PORT_OVERRIDE=8083
+    volumes:
+      - ./calibre-web-automated/config:/config
+      - ./media/books/ingest:/cwa-book-ingest
+      - ./media/books:/calibre-library
+      - ./calibre-web-automated/plugins:/config/.config/calibre/plugins
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+
+  calibre-web-automated-book-downloader:
+    image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest
+    container_name: calibre-web-automated-book-downloader
+    environment:
+      - TZ=Europe/Brussels
+      # - UID=1000
+      # - GID=100
+      # - CWA_DB_PATH=/auth/app.db
+    ports:
+      - "8084:8084"
+    restart: unless-stopped
+    volumes:
+      # This is where the books will be downloaded and ingested by your book management application
+      - ./media/books/ingest:/cwa-book-ingest
+      # Configuration files and database
+      - ./calibre-web-automated-book-downloader/config:/config

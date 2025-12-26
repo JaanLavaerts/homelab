@@ -113,6 +113,13 @@ pages:
                     url: http://192.168.1.10:40123
                     icon: /assets/cronmaster.png
 
+              - type: monitor
+                title: Other
+                cache: 30s
+                sites:
+                  - title: Expense tracker
+                    url: http://192.168.1.10:4173
+
   - name: System
     columns:
       - size: full

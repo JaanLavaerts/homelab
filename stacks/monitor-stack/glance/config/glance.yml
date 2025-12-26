@@ -114,7 +114,7 @@ pages:
                     url: http://192.168.1.10:32400
 
               - type: monitor
-                title: Books
+                title: Other
                 cache: 30s
                 sites:
                   - title: CWA
@@ -123,11 +123,6 @@ pages:
                   - title: CWA Downloader
                     icon: /assets/cwad.png
                     url: http://192.168.1.10:8084
-
-              - type: monitor
-                title: Other
-                cache: 30s
-                sites:
                   - title: Expenses
                     url: http://192.168.1.10:4173
                     icon: /assets/expenses.png

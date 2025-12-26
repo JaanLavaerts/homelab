@@ -68,6 +68,23 @@ pages:
           - type: split-column
             widgets:
               - type: monitor
+                title: Monitor Stack
+                cache: 30s
+                sites:
+                  - title: Beszel
+                    url: http://192.168.1.10:8090
+                    icon: /assets/beszel.png
+                  - title: Dockge
+                    url: http://192.168.1.10:5001
+                    icon: /assets/dockge.png
+                  - title: Glance
+                    url: http://192.168.1.10:80
+                    icon: /assets/glance.png
+                  - title: Cronmaster
+                    url: http://192.168.1.10:40123
+                    icon: /assets/cronmaster.png
+
+              - type: monitor
                 title: Media Stack
                 cache: 30s
                 sites:
@@ -97,33 +114,9 @@ pages:
                     url: http://192.168.1.10:32400
 
               - type: monitor
-                title: Monitor Stack
-                cache: 30s
-                sites:
-                  - title: Beszel
-                    url: http://192.168.1.10:8090
-                    icon: /assets/beszel.png
-                  - title: Dockge
-                    url: http://192.168.1.10:5001
-                    icon: /assets/dockge.png
-                  - title: Glance
-                    url: http://192.168.1.10:80
-                    icon: /assets/glance.png
-                  - title: Cronmaster
-                    url: http://192.168.1.10:40123
-                    icon: /assets/cronmaster.png
-
-              - type: monitor
                 title: Other
                 cache: 30s
                 sites:
-                  - title: Expense tracker
+                  - title: Expenses
                     url: http://192.168.1.10:4173
-
-  - name: System
-    columns:
-      - size: full
-        widgets:
-          - type: docker-containers
-            title: Docker containers
-            sock-path: /var/run/docker.sock
+                    icon: /assets/expenses.png

@@ -9,42 +9,31 @@ services:
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_COUNTRIES=Belgium,Netherlands,Germany
-      - HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE='{"auth":"none"}'
       - TZ=Europe/Brussels
     cap_add:
       - NET_ADMIN
     ports:
-      # These ports are published by the gluetun container
-      - "8080:8080"    # qBittorrent Web UI (set to match qbittorrent WEBUI_PORT)
-      - "6881:6881"    # example incoming TCP port (torrent traffic) - optional
-      - "6881:6881/udp" # incoming UDP (DHT / uTP)
-      - "8000:8000"    # Gluetun HTTP control server for status/API
-    volumes:
-      - ./gluetun/config:/gluetun
-    restart: unless-stopped
 
+      - 8080:8080
+      - 52222:52222
+      - 52222:52222/udp
+      - 8000:8000
+    restart: unless-stopped
   qbittorrent:
     image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
+    network_mode: service:gluetun
     environment:
       - PUID=1000
       - PGID=1000
       - WEBUI_PORT=8080
-      # - QBT_WEBUI_USERNAME=admin
-      # - QBT_WEBUI_PASSWORD=admin
       - TZ=Europe/Brussels
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
-      
     volumes:
       - ./qbittorrent/config:/config
       - ./media/downloads:/downloads
-      - ./media:/media
-      - ./media/nba:/nba
+    depends_on:
+      - gluetun
     restart: unless-stopped
-
   radarr:
     image: linuxserver/radarr:latest
     container_name: radarr
@@ -57,9 +46,8 @@ services:
       - ./media/downloads:/downloads
       - ./media/movies:/movies
     ports:
-      - "7878:7878"
+      - 7878:7878
     restart: unless-stopped
-
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -71,10 +59,10 @@ services:
       - ./sonarr/config:/config
       - ./media/downloads:/downloads
       - ./media/tv:/tv
+      - ./media/reality-tv:/reality-tv
     ports:
-      - "8989:8989"
+      - 8989:8989
     restart: unless-stopped
-
   prowlarr:
     image: linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -85,23 +73,31 @@ services:
     volumes:
       - ./prowlarr/config:/config
     ports:
-      - "9696:9696"
+      - 9696:9696
     restart: unless-stopped
-
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
     environment:
       - LOG_LEVEL=info
-      - LOG_HTML=false
-      - CAPTCHA_SOLVER=none
       - TZ=Europe/Brussels
     ports:
-      - "8191:8191"
+      - 8191:8191
     restart: unless-stopped
-
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+    volumes:
+      - ./jackett/config:/config
+    ports:
+      - 9117:9117
+    restart: unless-stopped
   bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
+    image: linuxserver/bazarr:latest
     container_name: bazarr
     environment:
       - PUID=1000
@@ -114,7 +110,6 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
-
   jellyfin:
     image: linuxserver/jellyfin:latest
     container_name: jellyfin
@@ -128,9 +123,8 @@ services:
     devices:
       - /dev/dri:/dev/dri
     ports:
-      - "8096:8096"
+      - 8096:8096
     restart: unless-stopped
-
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
@@ -143,5 +137,6 @@ services:
       - ./plex/config:/config
       - ./media:/media
     ports:
-      - "32400:32400"
+      - 32400:32400
     restart: unless-stopped
+networks: {}

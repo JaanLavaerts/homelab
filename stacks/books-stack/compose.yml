@@ -18,20 +18,4 @@ services:
     ports:
       - 8083:8083
     restart: unless-stopped
-  calibre-web-automated-book-downloader:
-    image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest
-    container_name: calibre-web-automated-book-downloader
-    environment:
-      - TZ=Europe/Brussels
-      # - UID=1000
-      # - GID=100
-      # - CWA_DB_PATH=/auth/app.db
-    ports:
-      - 8084:8084
-    restart: unless-stopped
-    volumes:
-      # This is where the books will be downloaded and ingested by your book management application
-      - ./media/books/ingest:/cwa-book-ingest
-      # Configuration files and database
-      - ./calibre-web-automated-book-downloader/config:/config
 networks: {}

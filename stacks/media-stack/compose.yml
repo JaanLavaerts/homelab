@@ -10,14 +10,15 @@ services:
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_COUNTRIES=Belgium,Netherlands,Germany
       - TZ=Europe/Brussels
+      - HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE={"auth":"none"}
     cap_add:
       - NET_ADMIN
     ports:
-
       - 8080:8080
       - 52222:52222
       - 52222:52222/udp
       - 8000:8000
+      - 9191:9191
     restart: unless-stopped
   qbittorrent:
     image: linuxserver/qbittorrent:latest
@@ -31,6 +32,22 @@ services:
     volumes:
       - ./qbittorrent/config:/config
       - ./media/downloads:/downloads
+      - ./media/nba:/nba
+    depends_on:
+      - gluetun
+    restart: unless-stopped
+  dispatcharr:
+    image: ghcr.io/dispatcharr/dispatcharr:latest
+    container_name: dispatcharr
+    network_mode: service:gluetun
+    environment:
+      - DISPATCHARR_ENV=aio
+      - TZ=Europe/Brussels
+      - REDIS_HOST=localhost
+      - CELERY_BROKER_URL=redis://localhost:6379/0
+      - DISPATCHARR_LOG_LEVEL=info
+    volumes:
+      - ./dispatcharr/data:/data
     depends_on:
       - gluetun
     restart: unless-stopped
@@ -124,7 +141,15 @@ services:
       - /dev/dri:/dev/dri
     ports:
       - 8096:8096
+    extra_hosts:
+      - host.docker.internal:host-gateway
     restart: unless-stopped
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN}
+    restart: unless-stopped
+    depends_on:
+      - jellyfin
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
@@ -138,5 +163,41 @@ services:
       - ./media:/media
     ports:
       - 32400:32400
+    restart: unless-stopped
+  pocket-id:
+    image: ghcr.io/pocket-id/pocket-id:v2
+    container_name: pocket-id
+    restart: unless-stopped
+    ports:
+      - 1411:1411
+    volumes:
+      - ./pocketid/data:/app/data
+    environment:
+      - APP_URL=https://auth.jaanlavaerts.com
+      - ENCRYPTION_KEY=${POCKETID_ENCRYPTION_KEY}
+      - TRUST_PROXY=true
+      - RELYING_PARTY_ID=auth.jaanlavaerts.com
+      - RELYING_PARTY_ORIGIN=https://auth.jaanlavaerts.com
+  tracearr:
+    image: ghcr.io/connorgallopo/tracearr:supervised
+    container_name: tracearr
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      - TZ=Europe/Brussels
+      - NODE_ENV=production
+    volumes:
+      - ./tracearr/data:/data/tracearr
+      - ./tracearr/postgres:/data/postgres
+      - ./tracearr/redis:/data/redis
+      - ./tracearr/imagecache:/app/data
+  pelagica:
+    image: kartoffelchipss/pelagica:latest
+    container_name: pelagica
+    ports:
+      - 81:80
+    volumes:
+      - ./config:/config
     restart: unless-stopped
 networks: {}

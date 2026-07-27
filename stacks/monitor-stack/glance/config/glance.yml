@@ -71,15 +71,18 @@ pages:
                 title: Monitor Stack
                 cache: 30s
                 sites:
+                  - title: Dockerhand
+                    url: http://192.168.1.10:5002
+                    icon: /assets/docker.webp
                   - title: Beszel
                     url: http://192.168.1.10:8090
                     icon: /assets/beszel.png
-                  - title: Dockge
-                    url: http://192.168.1.10:5001
-                    icon: /assets/dockge.png
-                  - title: Glance
-                    url: http://192.168.1.10:80
-                    icon: /assets/glance.png
+                  - title: Tracearr
+                    url: http://192.168.1.10:3000
+                    icon: /assets/tracearr.webp
+                  - title: ActualBudget (public)
+                    url: https://budget.jaanlavaerts.com
+                    icon: /assets/actual.webp
                   - title: Cronmaster
                     url: http://192.168.1.10:40123
                     icon: /assets/cronmaster.png
@@ -100,15 +103,15 @@ pages:
                   - title: Prowlarr
                     icon: /assets/prowlarr.png
                     url: http://192.168.1.10:9696
-                  - title: FlareSolverr
-                    icon: /assets/flaresolverr.png
-                    url: http://192.168.1.10:8191
+                  - title: Dispatcharr
+                    icon: /assets/dispatcharr.webp
+                    url: http://192.168.1.10:9191
                   - title: Bazarr
                     icon: /assets/bazarr.png
                     url: http://192.168.1.10:6767
-                  - title: Jellyfin
+                  - title: Jellyfin (public)
                     icon: /assets/jellyfin.png
-                    url: http://192.168.1.10:8096
+                    url: https://tv.jaanlavaerts.com
                   - title: Plex
                     icon: /assets/plex.png
                     url: http://192.168.1.10:32400/web/index.html
@@ -120,9 +123,6 @@ pages:
                   - title: CWA
                     icon: /assets/calibre.png
                     url: http://192.168.1.10:8083
-                  - title: CWA Downloader
-                    icon: /assets/cwad.png
-                    url: http://192.168.1.10:8084
-                  - title: Expenses
-                    url: http://192.168.1.10:4173
-                    icon: /assets/expenses.png
+                  - title: Pocket ID (public)
+                    icon: /assets/pocketid.webp
+                    url: https://auth.jaanlavaerts.com

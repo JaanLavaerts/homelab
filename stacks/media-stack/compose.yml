@@ -192,12 +192,4 @@ services:
       - ./tracearr/postgres:/data/postgres
       - ./tracearr/redis:/data/redis
       - ./tracearr/imagecache:/app/data
-  pelagica:
-    image: kartoffelchipss/pelagica:latest
-    container_name: pelagica
-    ports:
-      - 81:80
-    volumes:
-      - ./config:/config
-    restart: unless-stopped
 networks: {}

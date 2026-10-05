@@ -150,20 +150,6 @@ services:
     restart: unless-stopped
     depends_on:
       - jellyfin
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Brussels
-      - PLEX_CLAIM=claim-n2Dpd2wETH7fLL8XvRKF
-    volumes:
-      - ./plex/config:/config
-      - ./media:/media
-    ports:
-      - 32400:32400
-    restart: unless-stopped
   pocket-id:
     image: ghcr.io/pocket-id/pocket-id:v2
     container_name: pocket-id
@@ -186,10 +172,22 @@ services:
       - 3000:3000
     environment:
       - TZ=Europe/Brussels
-      - NODE_ENV=production
     volumes:
       - ./tracearr/data:/data/tracearr
       - ./tracearr/postgres:/data/postgres
       - ./tracearr/redis:/data/redis
-      - ./tracearr/imagecache:/app/data
+  sportarr:
+    image: sportarr/sportarr:latest
+    container_name: sportarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+    volumes:
+      - ./sportarr/config:/config
+      - ./media/downloads:/downloads
+      - ./media/sports:/sports
+    ports:
+      - 1867:1867
+    restart: unless-stopped
 networks: {}

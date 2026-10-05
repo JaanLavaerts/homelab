@@ -7,7 +7,7 @@ Sportarr provides two methods to integrate with Plex for sports metadata:
 
 ## Features
 
-- **Rich metadata**: Posters, banners, descriptions, and air dates from sportarr.net
+- **Rich metadata**: Posters, banners, descriptions, and air dates from sportarr.net (or a local Sportarr instance)
 - **Unified metadata**: Same data you see in Sportarr appears in Plex
 - **Multi-part support**: Handles fight cards (Early Prelims, Prelims, Main Card) and motorsport sessions
 - **Year-based seasons**: Uses 4-digit year format (2024, 2025) as season numbers
@@ -99,6 +99,15 @@ After copying the bundle, restart Plex for the agent to be loaded.
 4. Under **Advanced**, select **Sportarr (Legacy)** as the agent
 5. Click **Add Library**
 
+#### 4. (Optional) Point at a Local Sportarr Instance
+
+The legacy bundle has a **Sportarr API URL** preference (Plex → plug-in
+preferences). Leave it as `https://sportarr.net` to use the cloud, or set it
+to your own instance (e.g. `http://localhost:1867`) to serve metadata
+locally. A local instance exposes the same metadata API, and the episode
+numbers it returns are the same ones it wrote into your filenames, so the
+metadata stays in sync with your files.
+
 ---
 
 ## File Naming Convention
@@ -146,12 +155,42 @@ Motorsport events support up to 5 parts (Practice, Qualifying, Sprint, Pre-Race,
 
 ---
 
+## Automatic naming, episode numbers, and verification
+
+**Episode numbers come from Sportarr, and they can change.** An event's episode
+number is its chronological position within the season (cancelled and postponed
+events are skipped), so when the upstream schedule shifts, the number shifts:
+
+- **Running the Sportarr app?** You don't name anything. Sportarr imports,
+  names, and **renames** files automatically — when an event is added,
+  cancelled, or postponed it renumbers the season and renames the files on disk
+  on its next sync so the library stays correct.
+- **Using only this agent?** You name files yourself. Look up the current
+  episode number at <https://sportarr.net/browse> (open a league → season) and
+  name to match. Case and zero-padding don't matter (`S2026E12`, `s2026e12`,
+  and `s2026e012` all resolve to episode 12). The Sportarr app's naming format
+  is customizable under **Settings → Media Management**.
+
+### Verify it works
+
+1. Place one correctly-named file in `{Series}/Season {year}/` (or let the
+   Sportarr app import it) and scan the library.
+2. A correct match shows the right **episode number**, **poster**, **air date**,
+   and **description**.
+3. No match? Confirm the library type is **TV Shows**, the `Season {year}`
+   folder exists, and the number matches sportarr.net/browse, then use
+   **Fix Match / Identify** to pick the league.
+4. Episode number changed after a rescan? Expected — the schedule moved and
+   Sportarr reflected it.
+
+---
+
 ## How It Works
 
 1. **Scan**: Plex scans your library and finds files matching the naming convention
 2. **Parse**: Plex extracts series name, season, and episode from filenames
 3. **Query**: Sportarr metadata provider is called to find matches
-4. **Fetch**: Full metadata (posters, descriptions, air dates) is retrieved from sportarr.net
+4. **Fetch**: Full metadata (posters, descriptions, air dates) is retrieved from sportarr.net or your configured local instance. Each event is resolved individually via `/api/metadata/match` rather than pulling the whole season list per file
 5. **Display**: Rich metadata appears in your Plex library
 
 ---

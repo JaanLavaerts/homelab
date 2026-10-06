@@ -83,9 +83,9 @@ pages:
                   - title: ActualBudget (public)
                     url: https://budget.jaanlavaerts.com
                     icon: /assets/actual.webp
-                  - title: Cronmaster
-                    url: http://192.168.1.10:40123
-                    icon: /assets/cronmaster.png
+                  - title: Healthchecks
+                    url: http://192.168.1.10:8001
+                    icon: /assets/healthchecks.webp
 
               - type: monitor
                 title: Media Stack

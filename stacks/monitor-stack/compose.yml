@@ -50,23 +50,20 @@ services:
       KEY: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJvzMOmFpIHbBModwWV53dKGGEdffNSWsc3ncwswcY8N"
     restart: unless-stopped
 
-  cronmaster:
-    image: ghcr.io/fccview/cronmaster:latest
-    container_name: cronmaster
-    user: "root"
-    ports:
-      - "40123:3000"
+  healthchecks:
+    image: lscr.io/linuxserver/healthchecks:latest
+    container_name: healthchecks
     environment:
-      - NODE_ENV=production
-      - DOCKER=true
-      - NEXT_PUBLIC_CLOCK_UPDATE_INTERVAL=30000
-      - AUTH_PASSWORD=${CRONMASTER_PASSWORD}
-      - HOST_CRONTAB_USER=jaan
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+      - SITE_ROOT=http://192.168.1.10:8001
+      - SITE_NAME=Bakske Healthchecks
+      - SUPERUSER_EMAIL=${HC_SUPERUSER_EMAIL}
+      - SUPERUSER_PASSWORD=${HC_SUPERUSER_PASSWORD}
+      - SECRET_KEY=${HC_SECRET_KEY}
     volumes:
-      - ./cronmaster/scripts:/app/scripts
-      - ./cronmaster/data:/app/data
-      - ./cronmaster/snippets:/app/snippets
-      - /var/run/docker.sock:/var/run/docker.sock
-    pid: "host"
-    privileged: true
+      - ./healthchecks/config:/config
+    ports:
+      - 8001:8000
     restart: unless-stopped

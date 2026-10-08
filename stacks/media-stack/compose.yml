@@ -4,19 +4,23 @@ services:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
     environment:
-      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_COUNTRIES=Sweden,Netherlands,Germany
+      - FIREWALL_VPN_INPUT_PORTS=7310
       - TZ=Europe/Brussels
       - HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE={"auth":"none"}
     cap_add:
       - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
     ports:
       - 8080:8080
-      - 52222:52222
-      - 52222:52222/udp
+      - 7310:7310
+      - 7310:7310/udp
       - 8000:8000
       - 9191:9191
     restart: unless-stopped
@@ -189,5 +193,48 @@ services:
       - ./media/sports:/sports
     ports:
       - 1867:1867
+    restart: unless-stopped
+  game-request:
+    image: python:3.13-alpine
+    container_name: game-request
+    command: python -u /app/app.py
+    environment:
+      - TZ=Europe/Brussels
+      - SPORTARR_URL=http://sportarr:1867
+      - SPORTARR_API_KEY=${SPORTARR_API_KEY}
+      # Sportarr league ids
+      - NBA_LEAGUE_IDS=4
+      - OTHER_LEAGUE_IDS=8,14,15,16
+      - NCAA_LEAGUE_IDS=8
+      - TOURNAMENT_ONLY_LEAGUE_IDS=8
+    volumes:
+      - ./game-request:/app:ro
+    ports:
+      - 8585:8080
+    depends_on:
+      - sportarr
+    restart: unless-stopped
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
+    init: true
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Brussels
+      - PORT=5055
+    volumes:
+      - ./seerr/config:/app/config
+    ports:
+      - 5055:5055
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+    depends_on:
+      - jellyfin
+      - radarr
+      - sonarr
     restart: unless-stopped
 networks: {}
